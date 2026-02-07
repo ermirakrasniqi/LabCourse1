@@ -1,13 +1,17 @@
-import { Box, Container, MenuItem, Toolbar, Typography } from "@mui/material";
+import { Box, Container, LinearProgress, MenuItem, Toolbar, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import { Group } from "@mui/icons-material";
 import { NavLink } from "react-router";
 import MenuItemLink from "../shared/components/MenuItemLink";
+import { useStore } from "../../lib/hooks/useStore";
+import { Observer } from "mobx-react-lite";
 
 export default function NavBar() {
+    const {uiStore} = useStore();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundImage: 'linear-gradient(135deg, #182a73 0%, #218aae 69%, #20a7ac 89%)' }}>
+      <AppBar position="static" sx={{ backgroundImage: 'linear-gradient(135deg, #182a73 0%, #218aae 69%, #20a7ac 89%)', position: 'relative' }}>
 
         <Container maxWidth='xl'>
             <Toolbar sx={{display: 'flex', justifyContent: 'space-between '}}>
@@ -22,9 +26,11 @@ export default function NavBar() {
                     <MenuItemLink to='/activities'>
                         Activities
                     </MenuItemLink>
-
                     <MenuItemLink to='/createActivity'>
                         Create activity
+                    </MenuItemLink>
+                    <MenuItemLink to='/counter'>
+                        Counter
                     </MenuItemLink>
                 </Box>
                     <MenuItem>
@@ -32,6 +38,21 @@ export default function NavBar() {
                     </MenuItem>
             </Toolbar>
         </Container> 
+        <Observer>
+            {() => uiStore.isLoading ? (
+                <LinearProgress 
+                    color="secondary"
+                    sx={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: 4
+                    }}
+                />
+            ) : null}
+        </Observer>
+
       </AppBar>
     </Box>
   )
