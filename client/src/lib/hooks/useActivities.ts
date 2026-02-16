@@ -47,25 +47,22 @@ export const useActivities = (id?: string) => {
             return response.data;
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries ({
+            await queryClient.invalidateQueries({
                 queryKey: ['activities']
             })
         }
     })
-
     const deleteActivity = useMutation({
         mutationFn: async (id: string) => {
-            await agent.delete(`/activities/${id}`) //te qekjo agent.delete eshte metoda qe jemi tu e perdore
+            await agent.delete(`/activities/${id}`);
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries ({
+            await queryClient.invalidateQueries({
                 queryKey: ['activities']
             })
         }
     })
     
-
-
     return {
         activities,
         isPending,
