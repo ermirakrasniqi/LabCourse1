@@ -5,6 +5,7 @@ using Application.Activities.DTOs;
 using Application.Activities.Queries;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
